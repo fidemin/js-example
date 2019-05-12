@@ -21,7 +21,13 @@ function ptimeout(delay) {
 function grun(g) {
   const it = g(); // g should be generator
   (function iterate(val) {
-    const x = it.next(val);
+    let x = null;
+    try {
+       x = it.next(val);
+    } catch(err) {
+      console.log("exception in generator" + err);
+      return;
+    }
     if(!x.done) {
       if (x.value instanceof Promise) {
         // iterate를 계속 실행한다.

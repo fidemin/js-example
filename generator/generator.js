@@ -30,3 +30,17 @@ const it2 = ex_return();
 
 console.log(it2.next());
 console.log(it2.next(true));
+
+function* with_throw() {
+  yield 'blue';
+  throw 'Opps';
+  yield 'red';
+}
+
+const it3 = with_throw();
+it3.next();
+try {
+  it3.next();
+} catch(err) {
+  console.log(err);
+}
